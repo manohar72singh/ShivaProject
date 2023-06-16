@@ -99,6 +99,10 @@ app.post('/login', async (req, res) => {
     }
 })
 
+app.get('/home', (req, res) => {
+    res.json({ message: "Get Home Data" })
+})
+
 app.listen(2610, (err) => {
     if (err) console.log("error is ", err);
     console.log("server is live ")
