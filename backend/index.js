@@ -63,17 +63,15 @@ app.post('/login', async (req, res) => {
             res.status(404).json({ message: "Login data is invallid", status: false })
             return;
         }
-        // new Promise((resolve, reject) => {
-            
-        // })
-        const userExits = await userModel.findOne({username: body.username })
-        // const userExits = await userModel.findOne({
-        //     $or: [
-        //         { username: body.username },
-        //         { email: body.username },
-        //         { phoneNumber: body.username }
-        //     ]
-        // })
+
+        // const userExits = await userModel.findOne({username: body.username })
+        const userExits = await userModel.findOne({
+            $or: [
+                { username: body.username },
+                { email: body.username },
+                { phoneNumber: body.username }
+            ]
+        })
         if (!userExits) {
             res.status(404).json({ message: "userNot foun" })
             return;
