@@ -13,7 +13,7 @@ const url = 'mongodb+srv://manohar72singh:manoharsingh@cluster0.b8i7lql.mongodb.
 mongoose.connect(url).then((value) => {
     console.log("Sucessfully connected to database");
 }).catch((error) => {
-    console.log("Error connecting to database", err)
+    console.log("Error connecting to database", error)
 })
 
 
@@ -62,6 +62,9 @@ app.post('/login', async (req, res) => {
             res.status(404).json({ message: "Login data is invallid", status: false })
             return;
         }
+        // new Promise((resolve, reject) => {
+            
+        // })
         const userExits = await userModel.findOne({username: body.username })
         // const userExits = await userModel.findOne({
         //     $or: [
