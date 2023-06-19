@@ -38,25 +38,7 @@ app.post('/register', async (req, res) => {
         res.status(404).json({ message: "Phonenumber already exists", status: false });
         return;
     }
-    // const userExits = await userModel.findOne({
-    //     $or: [
-    //         { username: body.username },
-    //         { email: body.username },
-    //         { phoneNumber: body.username }
-    //     ]
-    // })
-    // // if (userExits === true) {
-    // //     res.status(400).json({ message: "User Already Exits", status: false })
-    // //     return;
-    // // }
-    // try {
-    //     if (userExits) {
-    //         res.status(400).json({ message: "User Already Exits", status: false })
-    //         return;
-    //     }
-    // } catch (e) {
-    //     console.log(e)
-    // }
+    
     body.password = await bcrypt.hash(body.password, 6);
     try {
         const savedata = await userModel.create(body);
