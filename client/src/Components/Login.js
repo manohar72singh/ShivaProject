@@ -41,7 +41,7 @@ export default function Login() {
                 username: email,
                 password: password
             }
-            fetch('http://127.0.0.1:2610/login', {
+            fetch('https://shiva-wifw.onrender.com/login', {
                 method: "POST",
                 body: JSON.stringify(loginData),
 

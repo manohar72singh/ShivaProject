@@ -107,7 +107,7 @@ export default function Register() {
             }
             // console.log(userData)
             // console.log(typeof (pinecode))
-            fetch('http://127.0.0.1:2610/register', {
+            fetch('https://shiva-wifw.onrender.com/register', {
                 method: "POST",
                 body: JSON.stringify(userData),
                 headers: {

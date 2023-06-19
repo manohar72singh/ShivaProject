@@ -19,34 +19,37 @@ mongoose.connect(url).then((value) => {
 
 app.post('/register', async (req, res) => {
     const body = req.body;
-    if (!(!body.name || !body.username || !body.email || !body.phoneNumber || !body.designation || !body.pincode || !body.state || !body.city || !body.district || !body.password)) {
-        res.status(404).json({ message: "All Fields Are required" });
-        return;
-    }
-    const emailExits = await userModel.findOne({ email: body.email })
-    const usernameexits = await userModel.findOne({ username: body.username })
-    const phonenumberExits = await userModel.findOne({ phoneNumber: body.phoneNumber })
-    if (emailExits) {
-        res.status(404).json({ message: "Email already exists", status: false });
-        return;
-    }
-    if (usernameexits) {
-        res.status(404).json({ message: "username already exists", status: false });
-        return;
-    }
-    if (phonenumberExits) {
-        res.status(404).json({ message: "Phonenumber already exists", status: false });
-        return;
-    }
-    
-    body.password = await bcrypt.hash(body.password, 6);
+
     try {
-        const savedata = await userModel.create(body);
-        res.status(201).json({ message: "Registration successfilly", data: savedata, status: true })
-        return;
-    } catch (e) {
-        console.log(e);
+        if (!(!body.name || !body.username || !body.email || !body.phoneNumber || !body.designation || !body.pincode || !body.state || !body.city || !body.district || !body.password)) {
+            res.status(404).json({ message: "All Fields Are required" });
+            return;
+        }
+        const emailExits = await userModel.findOne({ email: body.email })
+        const usernameexits = await userModel.findOne({ username: body.username })
+        const phonenumberExits = await userModel.findOne({ phoneNumber: body.phoneNumber })
+        if (emailExits) {
+            res.status(404).json({ message: "Email already exists", status: false });
+            return;
+        }
+        if (usernameexits) {
+            res.status(404).json({ message: "username already exists", status: false });
+            return;
+        }
+        if (phonenumberExits) {
+            res.status(404).json({ message: "Phonenumber already exists", status: false });
+            return;
+        }
+        
+        body.password = await bcrypt.hash(body.password, 6);
+            const savedata = await userModel.create(body);
+            res.status(201).json({ message: "Registration successfilly", data: savedata, status: true })
+            return;
+        
+    } catch (error) {
+        console.log("Registraion error is =" ,  error)        
     }
+
 
 
 })
