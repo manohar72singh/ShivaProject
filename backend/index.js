@@ -3,11 +3,12 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const userModel = require('./UserSchema');
 const bcrypt = require('bcrypt')
+const morgan = require('morgan')
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-
+app.use(morgan('common'))
 // const url = "mongodb://127.0.0.1:27017/shivaSolution";
 const url = 'mongodb+srv://manohar72singh:manoharsingh@cluster0.b8i7lql.mongodb.net/?retryWrites=true&w=majority'
 mongoose.connect(url).then((value) => {
