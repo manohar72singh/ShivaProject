@@ -57,14 +57,11 @@ app.post('/register', async (req, res) => {
 
 app.post('/login', async (req, res) => {
     const body = req.body;
-    console.log(body);
     try {
         if ((!body.username || !body.password)) {
             res.status(404).json({ message: "Login data is invallid", status: false })
             return;
         }
-
-        // const userExits = await userModel.findOne({username: body.username })
         const userExits = await userModel.findOne({
             $or: [
                 { username: body.username },
